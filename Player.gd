@@ -34,8 +34,10 @@ func _physics_process(delta):
 		velocity_to.y -= fall_acceleration * delta
 
 	# Applying LERP to vector 1
-	direction = lerp(direction, direction_to, delta)
-	velocity = lerp(velocity, velocity_to, delta)
+	#direction = lerp(direction, direction_to, delta)
+	#velocity = lerp(velocity, velocity_to, delta)
+	direction = direction_to
+	velocity = velocity_to
 	
 	# Moving the character
 	$Pivot.look_at(translation + direction, Vector3.UP)

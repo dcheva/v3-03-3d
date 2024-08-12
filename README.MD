@@ -3,3 +3,4 @@
 - ¶Player scene and input actions
 - ¶Creating input actions
 - ¶Moving the player with code
+- Using LERP

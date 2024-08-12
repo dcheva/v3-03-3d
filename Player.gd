@@ -29,7 +29,7 @@ func _physics_process(delta):
 	direction_to = direction_to.normalized()
 	direction = lerp(direction, direction_to, delta)
 	
-	# Fix look_at_from_position: parallel vectors UP and DOWN
+	# Fixed look_at_from_position: parallel vectors UP and DOWN
 	var pg = $Pivot.global_transform.origin
 	var pd = translation + direction
 	if pg[0] == pd[0] and pg[2] == pd[2]:
@@ -37,7 +37,7 @@ func _physics_process(delta):
 	else: 
 		$Pivot.look_at(pd, Vector3.UP)
 		
-	# Fix Nose down glitch caused by Pivot.Translation.y > 0
+	# Fixed Nose down glitch caused by Pivot.Translation.y > 0
 	$Pivot.rotation[0] = clamp($Pivot.rotation[0]+0.25, -0.5, +0.5)
 
 	# velocity lerp without Y

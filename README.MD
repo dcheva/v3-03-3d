@@ -6,4 +6,5 @@
 - Using LERP
 - REMEMBER Player.Pivot.xyz=000!!! if LERP used in Pivot.look_at for direction
 - Keep Pivot y=0.1 its funny
-- @TODO look_at_from_position: Up vector and direction...
+- Fixed Nose down glitch caused by Pivot.Translation.y > 0
+- Fixed look_at_from_position: parallel vectors UP and DOWN

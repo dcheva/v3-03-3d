@@ -5,7 +5,6 @@ export var speed = 14
 # The downward acceleration when in the air, in meters per second squared.
 export var fall_acceleration = 75
 # LERP delta
-export var d = 4
 
 var velocity = Vector3.ZERO
 var direction = Vector3.ZERO
@@ -25,14 +24,13 @@ func _physics_process(delta):
 		direction_to.z -= 1
 
 	direction_to = direction_to.normalized()
-	direction = lerp(direction, direction_to, delta*d)
+	direction = lerp(direction, direction_to, delta)
 	
-	if direction_to != Vector3.ZERO:
-		$Pivot.look_at(translation + direction, Vector3.UP)
+	$Pivot.look_at(translation + direction, Vector3.UP)
 
 	velocity_to.x = direction.x * speed
 	velocity_to.z = direction.z * speed
 	velocity_to.y -= fall_acceleration * delta
-	velocity = lerp(velocity, velocity_to, delta*d)
+	velocity = lerp(velocity, velocity_to, delta * 5)
 	
 	velocity = move_and_slide(velocity, Vector3.UP)

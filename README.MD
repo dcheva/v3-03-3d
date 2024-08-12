@@ -5,3 +5,4 @@
 - ¶Moving the player with code
 - Using LERP
 - REMEMBER Player.Pivot.xyz=000!!! if LERP used in Pivot.look_at for direction
+- Keep Pivot y=0.1 its funny

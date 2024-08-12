@@ -3,15 +3,17 @@ extends KinematicBody
 # How fast the player moves in meters per second.
 export var speed = 20
 # The downward acceleration when in the air, in meters per second squared.
-export var fall_acceleration = 200
+export var gravity = 200
 # LERP delta
 
 var velocity = Vector3.ZERO
 var direction = Vector3.ZERO
 
+func _ready():
+	direction.z = 0.1
+
 func _physics_process(delta):
 	
-	var velocity_to = Vector3.ZERO
 	var direction_to = Vector3.ZERO
 	
 	if Input.is_action_pressed("move_right"):
@@ -23,14 +25,19 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_forward"):
 		direction_to.z -= 1
 
+	# direcion lerp
 	direction_to = direction_to.normalized()
 	direction = lerp(direction, direction_to, delta)
 	
+	# @TODO look_at_from_position: Up vector and direction...
 	$Pivot.look_at(translation + direction, Vector3.UP)
+	# Fix Nose down glitch caused by Pivot.Translation.y > 0
+	$Pivot.rotation[0] = clamp($Pivot.rotation[0]+0.25, -0.5, +0.5)
 
-	velocity_to.x = direction.x * speed
-	velocity_to.z = direction.z * speed
-	velocity_to.y -= fall_acceleration * delta
-	velocity = lerp(velocity, velocity_to, delta * 5)
+	# velocity lerp without Y
+	velocity.x = lerp(velocity.x, direction.x * speed, delta * 5)
+	velocity.z = lerp(velocity.z, direction.z * speed, delta * 5)
+	# because of gravity
+	velocity.y -= gravity * delta
 	
 	velocity = move_and_slide(velocity, Vector3.UP)

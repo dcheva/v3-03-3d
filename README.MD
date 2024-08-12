@@ -2,3 +2,4 @@
 - ¶Setting up the game area
 - ¶Player scene and input actions
 - ¶Creating input actions
+- ¶Moving the player with code

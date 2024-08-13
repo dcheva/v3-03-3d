@@ -44,6 +44,9 @@ func _physics_process(delta):
 	velocity.x = lerp(velocity.x, direction.x * speed, delta * 5)
 	velocity.z = lerp(velocity.z, direction.z * speed, delta * 5)
 	# because of gravity
-	velocity.y -= gravity * delta
+	if !is_on_floor():
+		velocity.y -= gravity * delta
+	else:
+		velocity.y = 0
 	
 	velocity = move_and_slide(velocity, Vector3.UP)
